@@ -1,0 +1,1125 @@
+{
+	"info": {
+		"_postman_id": "4c92b71a-f2af-4290-a581-4cf371ee99a6",
+		"name": "ДЗ3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30604546"
+	},
+	"item": [
+		{
+			"name": "Авторизация пользователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "atos 673 9",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "86db1123c6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/login",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "atos 673 9",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "86db1123c6",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос пользователя со своим токеном",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/api/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос пользователя с чужим токеном",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"critical\");\r",
+							"});    \r",
+							"pm.test(\"Your test message\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Вы запрашиваете чужого пользователя.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "229103b1c507cf561c81f3317eb763ba",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/api/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя со своим токеном",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male ",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без firstName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male ",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя со всеми незаполненными полями",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без birthDate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без sex",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без phone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя без lastName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(Robot);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "Robot",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Обновление пользователя логин не уникален",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Your test error\", function () {\r",
+							"    pm.expect(jsonData.error).to.be.eql(\"Неуспешная попытка создания аккаунта\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test code\", function () {\r",
+							"    pm.expect(jsonData.code).to.be.eql(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test path\", function () {\r",
+							"    pm.expect(jsonData.message.path).to.be.eql(atos);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test message.code\", function () {\r",
+							"    pm.expect(jsonData.message.code).to.be.eql(2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "atos",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Приведение username пользователя к начальному значению",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "d26a27b1d7e36069350fdcd2b98237f3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/S9057/Downloads/R2.png"
+						},
+						{
+							"key": "firstName",
+							"value": "R2",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "D2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "atos 673 9",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "83216549870",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "male",
+							"type": "text"
+						},
+						{
+							"key": "birthDate",
+							"value": "1977-10-01",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test-stand.gb.ru/gateway/users/profile/27165",
+					"protocol": "https",
+					"host": [
+						"test-stand",
+						"gb",
+						"ru"
+					],
+					"path": [
+						"gateway",
+						"users",
+						"profile",
+						"27165"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
